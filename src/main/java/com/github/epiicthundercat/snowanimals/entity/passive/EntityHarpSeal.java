@@ -37,13 +37,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityHarpSeal extends EntityAnimal {
 	private static final Set<Item> TEMPTATION_ITEMS = Sets
-			.newHashSet(new Item[] { Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS });
+			.newHashSet(new Item[] { Items.FISH, Items.COOKED_FISH });
 
 	public static final ResourceLocation LOOT_SEAL = new ResourceLocation(Reference.ID, "entities/harp_seal");
 
 	public EntityHarpSeal(World worldIn) {
 		super(worldIn);
-		setSize(0.8F, 0.8F);
+		setSize(0.999F, 0.8F);
+		if (this.isChild()){
+			setSize(1.999F, 1.8F);
+		}
 		experienceValue = 10;
 		this.setPathPriority(PathNodeType.WATER, 0.0F);
 

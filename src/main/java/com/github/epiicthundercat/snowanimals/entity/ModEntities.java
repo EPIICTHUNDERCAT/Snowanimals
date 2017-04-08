@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.github.epiicthundercat.snowanimals.Snowanimals;
+import com.github.epiicthundercat.snowanimals.entity.passive.EntityArticOwl;
 import com.github.epiicthundercat.snowanimals.entity.passive.EntityHarpSeal;
 
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
@@ -23,7 +24,10 @@ public class ModEntities {
 		// Every entity in our mod has an ID (local to this mod)
 
 		// Harp Seal
-		EntityRegistry.registerModEntity(EntityHarpSeal.class, "Harp Seal", 0, Snowanimals.instance, 80, 3, false,
+		EntityRegistry.registerModEntity(EntityHarpSeal.class, "HarpSeal", 0, Snowanimals.instance, 80, 3, false,
+				0xffffff, 0xd9d9d9);
+		// Harp Seal
+		EntityRegistry.registerModEntity(EntityArticOwl.class, "ArticOwl", 1, Snowanimals.instance, 80, 3, false,
 				0xffffff, 0xd9d9d9);
 
 		/*
@@ -36,16 +40,25 @@ public class ModEntities {
 		EntityRegistry.addSpawn(EntityHarpSeal.class, 2, 4, 8, EnumCreatureType.CREATURE, Biomes.FROZEN_OCEAN,
 				Biomes.FROZEN_RIVER, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS,
 				Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS, Biomes.MUTATED_ICE_FLATS, Biomes.STONE_BEACH, Biomes.BEACH);
+		// Artic Owl
+				EntityRegistry.addSpawn(EntityArticOwl.class, 2, 4, 8, EnumCreatureType.AMBIENT, Biomes.FROZEN_OCEAN,
+						Biomes.FROZEN_RIVER, Biomes.COLD_BEACH, Biomes.COLD_TAIGA, Biomes.COLD_TAIGA_HILLS,
+						Biomes.ICE_MOUNTAINS, Biomes.ICE_PLAINS, Biomes.MUTATED_ICE_FLATS, Biomes.STONE_BEACH, Biomes.BEACH);
 
 		/*
 		 * Mob Placement
 		 */
 
 		// Harp Seal
-		EntitySpawnPlacementRegistry.setPlacementType(EntityHarpSeal.class, SpawnPlacementType.ON_GROUND);
+		EntitySpawnPlacementRegistry.setPlacementType(EntityHarpSeal.class, SpawnPlacementType.IN_WATER);
 
 		// Harp Seal
 		LootTableList.register(EntityHarpSeal.LOOT_SEAL);
+		// HArtic Owl
+				EntitySpawnPlacementRegistry.setPlacementType(EntityArticOwl.class, SpawnPlacementType.IN_AIR);
+
+				// Artic Owl
+				LootTableList.register(EntityArticOwl.LOOT_ARTIC_OWL);
 
 	}
 

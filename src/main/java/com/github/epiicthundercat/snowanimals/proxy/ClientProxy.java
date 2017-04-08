@@ -1,7 +1,10 @@
 package com.github.epiicthundercat.snowanimals.proxy;
 
+import com.github.epiicthundercat.snowanimals.client.model.ModelArticOwl;
+import com.github.epiicthundercat.snowanimals.client.renderer.entity.RenderEntityArticOwl;
 import com.github.epiicthundercat.snowanimals.client.renderer.entity.RenderEntityHarpSeal;
 import com.github.epiicthundercat.snowanimals.entity.ModEntities;
+import com.github.epiicthundercat.snowanimals.entity.passive.EntityArticOwl;
 import com.github.epiicthundercat.snowanimals.entity.passive.EntityHarpSeal;
 
 import net.minecraft.client.Minecraft;
@@ -22,6 +25,9 @@ public class ClientProxy extends CommonProxy{
 
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 		rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
+		rm.entityRenderMap.put(EntityArticOwl.class, new RenderEntityArticOwl(rm, new ModelArticOwl(), 0.4F));
+		//rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
+		//rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
 
 	}
 	@Override

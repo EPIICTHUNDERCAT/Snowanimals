@@ -13,15 +13,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderEntityHarpSeal extends RenderLiving<EntityHarpSeal> {
-	private static final ResourceLocation HARP_SEAL_TEXTURE = new ResourceLocation(Reference.ID, "textures/entity/harp_seal.png");
-	private static final ResourceLocation CHILDSEAL = new ResourceLocation(Reference.ID, "textures/entity/childharp_seal.png");
+	private static final ResourceLocation HARP_SEAL_TEXTURE = new ResourceLocation(Reference.ID, "textures/entity/seal/harp_seal.png");
+	private static final ResourceLocation CHILDSEAL = new ResourceLocation(Reference.ID, "textures/entity/seal/childharp_seal.png");
 	
 	public RenderEntityHarpSeal(RenderManager renderManagerIn) {
 		super(renderManagerIn, new ModelHarpSeal(), 0.5F);
 	}
 
 
-
+/*
 	@Override
 	public void doRender(EntityHarpSeal entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
@@ -31,7 +31,7 @@ public class RenderEntityHarpSeal extends RenderLiving<EntityHarpSeal> {
 		}
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 		
-	}
+	}*/
     /**
 	 * Returns the location of an entity's texture. Doesn't seem to be called
 	 * unless you call Render.bindEntityTexture.
