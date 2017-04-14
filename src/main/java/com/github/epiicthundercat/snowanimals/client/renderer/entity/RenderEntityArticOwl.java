@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderEntityArticOwl extends RenderLiving<EntityArticOwl>
 {
-    private static final ResourceLocation ARTIC_OWL_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/artic_owl.png");
+    private static final ResourceLocation ARTIC_OWL_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/owl/artic_owl.png");
 
     public RenderEntityArticOwl(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn)
     {

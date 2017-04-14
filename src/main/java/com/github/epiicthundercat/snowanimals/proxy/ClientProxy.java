@@ -1,11 +1,15 @@
 package com.github.epiicthundercat.snowanimals.proxy;
 
+import com.github.epiicthundercat.snowanimals.client.model.ModelArticFox;
 import com.github.epiicthundercat.snowanimals.client.model.ModelArticOwl;
+import com.github.epiicthundercat.snowanimals.client.renderer.entity.RenderEntityArticFox;
 import com.github.epiicthundercat.snowanimals.client.renderer.entity.RenderEntityArticOwl;
 import com.github.epiicthundercat.snowanimals.client.renderer.entity.RenderEntityHarpSeal;
 import com.github.epiicthundercat.snowanimals.entity.ModEntities;
+import com.github.epiicthundercat.snowanimals.entity.passive.EntityArticFox;
 import com.github.epiicthundercat.snowanimals.entity.passive.EntityArticOwl;
 import com.github.epiicthundercat.snowanimals.entity.passive.EntityHarpSeal;
+import com.github.epiicthundercat.snowanimals.init.SItems;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -26,13 +30,13 @@ public class ClientProxy extends CommonProxy{
 		RenderManager rm = Minecraft.getMinecraft().getRenderManager();
 		rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
 		rm.entityRenderMap.put(EntityArticOwl.class, new RenderEntityArticOwl(rm, new ModelArticOwl(), 0.4F));
-		//rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
+		rm.entityRenderMap.put(EntityArticFox.class, new RenderEntityArticFox(rm, new ModelArticFox(), 0.4F));
 		//rm.entityRenderMap.put(EntityHarpSeal.class, new RenderEntityHarpSeal(rm));
 
 	}
 	@Override
 	public void registerRenders(FMLInitializationEvent event) {
-		//SItems.registerRender(event);
+		SItems.registerRender(event);
 		// SBlocks.registerRender(event);
 	}
 	

@@ -55,15 +55,15 @@ public class ModelHarpSeal extends ModelBase {
     }
 
     @Override
-    public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-    	 this.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, entityIn);
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    	setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     	 if (this.isChild)
          {
-             float f = 2.0F;
+             float f12 = 2.0F;
              GlStateManager.pushMatrix();
              GlStateManager.translate(0.0F, 1.2, -1.0F);
              GlStateManager.scale(0.6F, 0.6F, 0.6F);
-             this.SealBody.render(scale);
+             this.SealBody.render(f5);
              GlStateManager.popMatrix();
             
          }
@@ -72,7 +72,7 @@ public class ModelHarpSeal extends ModelBase {
         	 GlStateManager.pushMatrix();
              GlStateManager.translate(0.0F, 1.0, -1.0F);
             
-             this.SealBody.render(scale);
+             this.SealBody.render(f5);
              GlStateManager.popMatrix();
          }
        
@@ -84,22 +84,22 @@ public class ModelHarpSeal extends ModelBase {
         modelRenderer.rotateAngleZ = z;
         
     }
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch, float scaleFactor, Entity entityIn) {
-		EntityHarpSeal seal =(EntityHarpSeal) entityIn;
-		this.SealHead.rotateAngleX = headPitch * 0.017453292F;
-		this.SealHead.rotateAngleY = netHeadYaw * 0.017453292F;
+    public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5, Entity entity) {
+		EntityHarpSeal seal =(EntityHarpSeal) entity;
+		this.SealHead.rotateAngleX = f4 * 0.017453292F;
+		this.SealHead.rotateAngleY = f3 * 0.017453292F;
 		
-		this.Arm1.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.Arm2.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+		this.Arm1.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+		this.Arm2.rotateAngleX = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
 
-		this.Arm1.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.Arm2.rotateAngleZ = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+		this.Arm1.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+		this.Arm2.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float) Math.PI) * 1.4F * f1;
 		
-		TailEnd.rotateAngleY = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		TailEnd.rotateAngleY = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		
 		if (seal.isInWater())
-		{	TailEnd.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		{	TailEnd.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
 		
 		}
 	}

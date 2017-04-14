@@ -1,5 +1,7 @@
 package com.github.epiicthundercat.snowanimals.proxy;
 
+import com.github.epiicthundercat.snowanimals.init.SItems;
+
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -18,7 +20,7 @@ public class CommonProxy {
 	}
 
 	private void register(FMLPreInitializationEvent preEvent) {
-	//	SItems.register(preEvent);
+		SItems.register(preEvent);
 	//	SRecipes.register(preEvent);
 		
 		//SBlocks.register(preEvent);
