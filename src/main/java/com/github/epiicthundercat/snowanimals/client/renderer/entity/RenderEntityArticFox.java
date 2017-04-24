@@ -11,9 +11,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderEntityArticFox extends RenderLiving<EntityArticFox>
 {
-    private static final ResourceLocation WOLF_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox.png");
-    private static final ResourceLocation TAMED_WOLF_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox.png");
-    private static final ResourceLocation ANRGY_WOLF_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox.png");
+    private static final ResourceLocation FOX_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox.png");
+    private static final ResourceLocation TAMED_FOX_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox_tamed.png");
+    private static final ResourceLocation ANRGY_FOX_TEXTURES = new ResourceLocation(Reference.ID, "textures/entity/fox/artic_fox_angry.png");
 
     public RenderEntityArticFox(RenderManager renderManagerIn, ModelBase modelBaseIn, float shadowSizeIn)
     {
@@ -24,7 +24,7 @@ public class RenderEntityArticFox extends RenderLiving<EntityArticFox>
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
-    /*protected float handleRotationFloat(EntityArticFox livingBase, float partialTicks)
+    protected float handleRotationFloat(EntityArticFox livingBase, float partialTicks)
     {
         return livingBase.getTailRotation();
     }
@@ -48,6 +48,6 @@ public class RenderEntityArticFox extends RenderLiving<EntityArticFox>
      */
     protected ResourceLocation getEntityTexture(EntityArticFox entity)
     {
-        return entity.isTamed() ? TAMED_WOLF_TEXTURES : (entity.isAngry() ? ANRGY_WOLF_TEXTURES : WOLF_TEXTURES);
+        return entity.isTamed() ? TAMED_FOX_TEXTURES : (entity.isAngry() ? ANRGY_FOX_TEXTURES : FOX_TEXTURES);
     }
 }

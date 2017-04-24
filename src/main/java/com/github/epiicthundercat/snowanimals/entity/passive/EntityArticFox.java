@@ -79,6 +79,7 @@ public class EntityArticFox extends EntityTameable {
 	/**
 	 * This time increases while Fox is shaking and emitting water particles.
 	 */
+	protected EntityAIFoxSit aiSit;
 	private float timeFoxIsShaking;
 	private float prevTimeFoxIsShaking;
 
@@ -89,7 +90,7 @@ public class EntityArticFox extends EntityTameable {
 	}
 
 	protected void initEntityAI() {
-		this.aiSit = new EntityAISit(this);
+		this.aiSit = new EntityArticFox.EntityAIFoxSit(this);
 		this.tasks.addTask(1, new EntityAISwimming(this));
 		this.tasks.addTask(2, this.aiSit);
 		this.tasks.addTask(3, new EntityAILeapAtTarget(this, 0.4F));
@@ -97,7 +98,7 @@ public class EntityArticFox extends EntityTameable {
 		this.tasks.addTask(5, new EntityAIFollowOwner(this, 1.0D, 10.0F, 2.0F));
 		this.tasks.addTask(6, new EntityAIMate(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
-		this.tasks.addTask(8, new FoxBeg(this, 8.0F));
+		this.tasks.addTask(8, new EntityArticFox.FoxBeg(this, 8.0F));
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		this.tasks.addTask(9, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIOwnerHurtByTarget(this));
@@ -165,6 +166,7 @@ public class EntityArticFox extends EntityTameable {
 		super.writeEntityToNBT(compound);
 		compound.setBoolean("Angry", this.isAngry());
 		compound.setByte("CollarColor", (byte) this.getCollarColor().getDyeDamage());
+		compound.setBoolean("Sitting", isSitting());
 	}
 
 	/**
@@ -177,6 +179,11 @@ public class EntityArticFox extends EntityTameable {
 		if (compound.hasKey("CollarColor", 99)) {
 			this.setCollarColor(EnumDyeColor.byDyeDamage(compound.getByte("CollarColor")));
 		}
+		if (aiSit != null) {
+			aiSit.setSitting(compound.getBoolean("Sitting"));
+		}
+
+		setSitting(compound.getBoolean("Sitting"));
 	}
 
 	protected SoundEvent getAmbientSound() {
@@ -226,7 +233,21 @@ public class EntityArticFox extends EntityTameable {
 			this.setAngry(false);
 		}
 	}
+	
+	
+	public boolean isSitting() {
+		return (dataManager.get(TAMED).byteValue() & 1) != 0;
+	}
 
+	public void setSitting(boolean sitting) {
+		byte b0 = dataManager.get(TAMED).byteValue();
+
+		if (sitting) {
+			dataManager.set(TAMED, Byte.valueOf((byte) (b0 | 1)));
+		} else {
+			dataManager.set(TAMED, Byte.valueOf((byte) (b0 & -2)));
+		}
+	}
 	/**
 	 * Called to update the entity's position/logic.
 	 */
@@ -316,7 +337,7 @@ public class EntityArticFox extends EntityTameable {
 	}
 
 	public float getEyeHeight() {
-		return this.height * 0.8F;
+		return this.height;
 	}
 
 	/**
@@ -636,4 +657,59 @@ public class EntityArticFox extends EntityTameable {
 		}
 	}
 
+	static class EntityAIFoxSit extends EntityAIBase {
+		private final EntityArticFox theEntity;
+
+		/** If the EntityTameable is sitting. */
+
+		private boolean isSitting;
+
+		public EntityAIFoxSit(EntityArticFox entityIn) {
+			theEntity = entityIn;
+			setMutexBits(5);
+		}
+
+		/**
+		 * Returns whether the EntityAIBase should begin execution.
+		 */
+		@Override
+		public boolean shouldExecute() {
+			if (!theEntity.isTamed()) {
+				return false;
+			} else if (theEntity.isInWater()) {
+				return false;
+			} else if (!theEntity.onGround) {
+				return false;
+			} else {
+				EntityLivingBase entitylivingbase = theEntity.getOwner();
+				return entitylivingbase == null ? true
+						: (theEntity.getDistanceSqToEntity(entitylivingbase) < 144.0D
+								&& entitylivingbase.getAITarget() != null ? false : isSitting);
+			}
+		}
+
+		/**
+		 * Execute a one shot task or start executing a continuous task
+		 */
+		@Override
+		public void startExecuting() {
+			theEntity.getNavigator().clearPathEntity();
+			theEntity.setSitting(true);
+		}
+
+		/**
+		 * Resets the task
+		 */
+		@Override
+		public void resetTask() {
+			theEntity.setSitting(false);
+		}
+
+		/**
+		 * Sets the sitting flag.
+		 */
+		public void setSitting(boolean sitting) {
+			isSitting = sitting;
+		}
+	}
 }
